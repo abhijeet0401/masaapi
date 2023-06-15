@@ -533,28 +533,9 @@ async function checkCode(phone_no,code){
 
 const verifyGreenResult = await masa.green.verify(phone_no, code);
 console.log(verifyGreenResult);
-if (!verifyGreenResult?.success) {
-  console.error(
-    `Verifying Green failed! '${verifyGreenResult?.message}'`
-  );
-}
-console.log(`Minting Green on '${masa.config.networkName}'`);
 
-const mintGreenResult= await masa.green.mint(
-  'CELO',
-  '0x8002FcC68DA875B83a5faAE1BaBb349447A6B797',
-  2023,
-  '477195664f4a5ccd2caaa47771f5d0ab9451946c1a18b8ef215fb01059e3fdd9'
-);
-if (mintGreenResult && mintGreenResult.tokenId) {
-  console.log(
-    `Green successfully minted on '${masa.config.networkName}' with token ID: '${mintGreenResult.tokenId}'`
-  );
-  return (mintGreenResult.tokenId)
-}
-else{
-  return("error")
-}
+ return verifyGreenResult?.success
+
  }
  app.get('/mintnft/:address/:nft', async (req, res) => {
 
